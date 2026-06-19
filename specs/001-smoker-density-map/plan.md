@@ -24,9 +24,9 @@
 
 **Performance Goals**: 地圖含既有密度於 3 秒內呈現（SC-001）；新回報 5 秒內反映（SC-003）；單區數百標記縮放平移順暢（SC-004，靠聚合）
 
-**Constraints**: 全程 HTTPS/TLS；匿名亦可回報且不收個資；座標限台灣（含離島）地理範圍；Clean Architecture 分層依賴方向內向
+**Constraints**: 全程 HTTPS/TLS；匿名亦可回報且不收個資；座標限台灣（含離島）地理範圍；Clean Architecture 分層依賴方向內向；台灣《個資法》合規（SourceHash 採裝置指紋非 IP、隱私政策頁揭露 Turnstile 資料處理者）
 
-**Scale/Scope**: 初期單機 SQLite，社群眾包規模（千級回報量）；3 個 user story、12 條 FR
+**Scale/Scope**: 初期單機 SQLite，社群眾包規模（千級回報量）；3 個 user story、19 條 FR（FR-017~019 為法律合規：底部免責聲明、送出確認彈窗、隱私政策頁 + 申訴信箱）
 
 ## Constitution Check
 

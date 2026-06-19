@@ -88,6 +88,7 @@ description: "Task list for 菸槍熱點地圖 implementation"
 
 - [ ] T040 [US2] 後端 `GET /api/members/me/reports` 與 `DELETE /api/reports/{id}`（僅擁有者，回 204/403/404）於 `backend/src/SmokeSpot.Api/Controllers/`，使用案例於 `SmokeSpot.Application/Reports/`
 - [ ] T041 [P] [US2] 前端「我的回報」頁 `frontend/src/pages/MyReports.vue` + store 動作（檢視/刪除，僅登入可見）
+- [ ] T042 [P] [US2] 送出回報前知情同意確認彈窗於 `frontend/src/components/ReportForm.vue`：確認後才呼叫 API，取消則不送出（FR-018）
 
 ---
 
@@ -111,8 +112,10 @@ description: "Task list for 菸槍熱點地圖 implementation"
 
 - [ ] T034 [P] 後端整合測試 `backend/tests/SmokeSpot.Api.IntegrationTests/ReportsApiTests.cs`（WebApplicationFactory：GET/POST/feedback、會員 me/reports 與 DELETE、429 每日上限、匿名缺 CAPTCHA 回 400；CAPTCHA verifier 以假實作注入）
 - [ ] T035 [P] 響應式樣式與行動裝置驗證（SC-004 數百標記順暢）於 `frontend/src/`
+- [ ] T043 [P] 全頁底部免責聲明元件於 `frontend/src/components/DisclaimerFooter.vue`，嵌入 `frontend/src/App.vue`（FR-017：主觀眾包、非官方數據、平台不負確準責任）
+- [ ] T044 [P] 靜態隱私政策頁於 `frontend/src/pages/PrivacyPolicy.vue`，Vue Router 路由 `/privacy`；揭露 Turnstile 第三方資料處理者與目的、申訴信箱（FR-019）
 - [ ] T036 [P] README 與 quickstart 對齊於 `specs/001-smoker-density-map/quickstart.md`
-- [ ] T037 執行 quickstart.md 全部 7 個驗證情境，確認 SC-001/003/004/006 達標
+- [ ] T037 執行 quickstart.md 全部 10 個驗證情境，確認 SC-001/003/004/006 達標及法律合規（FR-017/018/019）
 
 ---
 
@@ -135,7 +138,7 @@ description: "Task list for 菸槍熱點地圖 implementation"
 - Setup：T002/T003/T004 平行
 - Foundational：T005/T006/T007 平行；T013 與後端 T008–T012 平行
 - US1：T016（前端 Map）與 T014–T015（後端）平行
-- US2：T024/T025/T026/T027/T039/T041 平行（不同檔案）；T038/T040 為後端使用案例
+- US2：T024/T025/T026/T027/T039/T041/T042 平行（不同檔案）；T038/T040 為後端使用案例
 - 跨 story：Foundational 完成後 US1 與 US2 可由不同人平行（US3 的 T030 需待 US1 T014）
 
 ---
@@ -168,6 +171,7 @@ Foundation → US1（MVP，看地圖）→ US2（網友標記）→ US3（衰退
 - [P] = 不同檔案、無相依
 - T030 刻意與 US1 的 `GetHotspots.cs` 同檔（衰退是 US1 聚合的增強），故排在 US1 之後
 - 防亂回報分層（spec Clarify 2026-06-19）：CAPTCHA(T038/T039) → 每日上限(T021) → 每格去重(T021) → 鄰近權重(T021+T030) → 反饋壓低 3 來源(T032)
-- T038–T041 為澄清後新增（CAPTCHA、會員管理自己的回報）；屬 US2 範圍
+- T038–T042 為澄清後新增（CAPTCHA、會員管理自己的回報、知情同意彈窗）；屬 US2 範圍
+- T043–T044 為法律合規新增（底部免責聲明元件、隱私政策頁）；屬 Polish 範圍，不阻擋任何 user story
 - ponytail：聚合與衰退皆於讀取時計算、無排程；去重以時間窗+來源+grid，密度計權再對每來源每格設權重上限。CAPTCHA 用免費 Turnstile。資料量大再加預聚合表/空間索引（見 research.md）
 - 每完成一個 checkpoint 即可獨立驗證該 story
